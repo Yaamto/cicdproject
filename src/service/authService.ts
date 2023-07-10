@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken"
 export const findOne = async(data: IUser) => {
     const user = await User.findOne(data);
     if(!user){
-    
+        throw Error("User not found")
     }
     return user
 }
