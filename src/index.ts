@@ -1,6 +1,7 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
 const authRoute = require("./route/authRoute")
+const recipeRoute = require("./route/recipeRoute")
 require('./config/db')
 dotenv.config();
 
@@ -14,3 +15,4 @@ app.listen(port, () => {
 });
 
 app.use("/api/auth", authRoute)
+app.use("/api/recipes", recipeRoute)

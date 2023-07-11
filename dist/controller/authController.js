@@ -35,11 +35,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.login = exports.register = void 0;
 const userService = __importStar(require("../service/authService"));
 const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const data = yield userService.register(req.body);
-    if (data instanceof Error) {
-        return res.status(400).json({ error: data.message });
+    try {
+        const data = yield userService.register(req.body);
+        if (data instanceof Error) {
+            return res.status(400).json({ error: data.message });
+        }
+        return res.status(201).json({ data });
     }
-    return res.status(201).json({ data });
+    catch (e) {
+        return res.status(400).json({ error: e });
+    }
 });
 exports.register = register;
 const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
