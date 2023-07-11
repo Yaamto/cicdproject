@@ -1,4 +1,3 @@
-import { IUser } from '../model/userModel';
 import * as userService from '../service/authService';
 import { Request, Response } from 'express';
 

@@ -16,3 +16,11 @@ export const create = async(data: IStep, recipeId: string) => {
         throw new Error("Error on creating steps")
     }
 }
+
+export const deleteMany = async(data: any[]) =>{
+    try {
+        return await Step.deleteMany({ _id: { $in: data } });
+    }catch(e){
+        return e
+    }
+}

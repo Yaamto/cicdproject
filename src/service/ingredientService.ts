@@ -10,3 +10,11 @@ export const create = async(data: IIngredient) => {
         throw new Error("Error on creating ingredients")
     }
 }
+
+export const deleteMany = async(data: any[]) =>{
+    try {
+        return await Ingredient.deleteMany({ _id: { $in: data } });
+    }catch(e){
+        return e
+    }
+}

@@ -22,6 +22,11 @@ const RecipeSchema = new mongoose.Schema({
         type: Number,
         required: [true, "Number of person is required"]
     },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "user",
+        required: [true, "User is required"]
+    },
     ingredients: [{
         type: mongoose.Schema.Types.ObjectId,
         ref:"ingredient"

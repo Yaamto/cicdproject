@@ -2,28 +2,28 @@ import { Request, Response } from 'express';
 import {User} from '../model/userModel'
 import jwt from "jsonwebtoken"
 
-export const checkStore = async (req: Request, res: Response, next: any) => {
+export const checkAuth = async (req: Request, res: Response, next: any) => {
 
-    const token = req.cookies.jwt
+    const token = req.cookies.jwt || null
     const secret = process.env.TOKEN_SECRET
     if (token && secret) {
         jwt.verify(token, secret, async(err: any, decodedToken: any) => {
             if (err) {
-                res.locals.store = null;
+                res.locals.user = null;
                 res.cookie("jwt", "", { maxAge: 1 });
-                return res.json('token not available or expired')
+                return res.status(403).json({error: "Bad token"})
             } 
-            const store = await User.findById(decodedToken.id);
-            res.locals.store = store;
-            if (!res.locals.store) {
+            const user = await User.findById(decodedToken.id);
+            res.locals.user = user;
+            if (!res.locals.user) {
                 res.cookie("jwt", "", { maxAge: 1 });
-                return res.json("you are not logged")
+                return res.status(403).json({error: "User doesn't exist"})
             }
             next();
         });
     } else {
-        res.locals.store = null;
-        return res.json({ msg: "no token provided" })
+        res.locals.user = null;
+        return res.status(403).json({error: "Not authorized"})
 
     }
 }
