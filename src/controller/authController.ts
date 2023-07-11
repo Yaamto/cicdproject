@@ -1,13 +1,16 @@
-import { IUser } from '../model/userModel';
 import * as userService from '../service/authService';
 import { Request, Response } from 'express';
 
 export const register = async (req: Request, res: Response) => {
-    const data = await userService.register(req.body as any);
-    if(data instanceof Error){
-        return res.status(400).json({error: data.message});
+    try {
+        const data = await userService.register(req.body as any);
+        if(data instanceof Error){
+            return res.status(400).json({error: data.message});
+        }
+        return res.status(201).json({data});
+    }catch(e){
+        return res.status(400).json({error: e})
     }
-    return res.status(201).json({data});
 } 
 
 export const login = async(req: Request, res: Response) => {

@@ -1,12 +1,14 @@
 import express, { Express, Request, Response } from 'express';
+import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 const authRoute = require("./route/authRoute")
+const recipeRoute = require("./route/recipeRoute")
 require('./config/db')
 dotenv.config();
 
 const app: Express = express();
-const port = process.env.PORT;
-
+const port = process.env.PORT || 3000;
+app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.listen(port, () => {
@@ -14,3 +16,4 @@ app.listen(port, () => {
 });
 
 app.use("/api/auth", authRoute)
+app.use("/api/recipes", recipeRoute)

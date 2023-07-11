@@ -19,6 +19,7 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const findOne = (data) => __awaiter(void 0, void 0, void 0, function* () {
     const user = yield userModel_1.User.findOne(data);
     if (!user) {
+        throw Error("User not found");
     }
     return user;
 });
