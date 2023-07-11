@@ -24,6 +24,5 @@ export const checkAuth = async (req: Request, res: Response, next: any) => {
     } else {
         res.locals.user = null;
         return res.status(403).json({error: "Not authorized"})
-
     }
 }

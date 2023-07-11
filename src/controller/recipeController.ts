@@ -8,8 +8,8 @@ export const findAll = async(req: Request, res: Response) => {
             return res.status(404).json({error: data.message})
         }
         return res.status(200).json({data})
-    }catch(e){
-        return res.status(400).json({error: e})
+    }catch(error){
+        return res.status(400).json({error: error})
     }
 }
 
@@ -20,21 +20,20 @@ export const create = async(req: Request, res: Response) => {
             return res.status(400).json({error: data.message})
         }
        return res.status(201).json({data})
-    }catch(e){
-        return res.status(400).json({error: e})
+    }catch(error){
+        return res.status(400).json({error: error})
     }
 }
 
 export const deleteRecipe = async(req: Request, res: Response) => {
     try {
-        
         const data: any = await recipeService.deleteRecipe(req.params.id, res.locals.user._id.toString())
         if(data instanceof Error){
             return res.status(400).json({error: data.message})
         }
         return res.status(200).json({data: `${data.name} deleted successfully`})
-    }catch(e){
-        return res.status(400).json({error: e})
+    }catch(error){
+        return res.status(400).json({error: error})
     }
 }
 
@@ -45,8 +44,8 @@ export const findOne = async(req: Request, res: Response) => {
             return res.status(400).json({error: data.message})
         }
         return res.status(200).json({data})
-    }catch(e){
-        return res.status(400).json({error: e})
+    }catch(error){
+        return res.status(400).json({error: error})
     }
 }
 
@@ -57,7 +56,19 @@ export const update = async(req: Request, res: Response) => {
             return res.status(400).json({error: data.message})
         }
         return res.status(200).json({data})
-    }catch(e){
-        return res.status(400).json({error: e})
+    }catch(error){
+        return res.status(400).json({error: error})
+    }
+}
+
+export const analyze = async(req: Request, res: Response) => {
+    try {
+        const data: any = await recipeService.analyze(req.params.id)
+        if(data instanceof Error){
+            return res.status(400).json({error: data.message})
+        }
+        return res.status(200).json({data})
+    }catch(error){
+        return res.status(400).json({error: error})
     }
 }
