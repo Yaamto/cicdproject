@@ -31,4 +31,5 @@ const router = express_1.default.Router();
 const authController = __importStar(require("../controller/authController"));
 router.post('/register', authController.register);
 router.post('/login', authController.login);
+router.post('/logout', authController.logout);
 module.exports = router;

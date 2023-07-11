@@ -32,7 +32,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.login = exports.register = void 0;
+exports.logout = exports.login = exports.register = void 0;
 const userService = __importStar(require("../service/authService"));
 const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -61,3 +61,8 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     return res.status(200).json({ user: data, token: token });
 });
 exports.login = login;
+const logout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.cookie("jwt", "", { maxAge: 1 });
+    return res.status(200).json({ message: "Your are now logged out" });
+});
+exports.logout = logout;
