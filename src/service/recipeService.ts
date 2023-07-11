@@ -1,3 +1,4 @@
+import { IIngredient } from "../model/ingredientModel"
 import {Recipe, IRecipe} from "../model/recipeModel"
 import { IStep } from "../model/stepModel"
 import * as ingredientService from "../service/ingredientService"
@@ -131,3 +132,48 @@ export const update = async (recipeId: string, updatedData: IRecipe, userId: str
       return error;
     }
   };
+
+  export const analyze = async (recipeId: string) => {
+    try {
+      // Récupère la recette spécifique
+      const recipe = await Recipe.findById(recipeId).populate("ingredients");
+      if (!recipe) {
+        return new Error("Recipe not found");
+      }
+      const result = await calculCalorique(recipe.ingredients);
+      if(result){
+          return result;
+      }
+  }catch(error){
+    return error
+  }
+}
+
+const calculCalorique = async (ingredients: any) => {
+    const refCal = {
+        proteine: 4,
+        lipide: 9,
+        glucide: 4
+    }
+    const resultNutrition = {
+        totalProtein: 0,
+        totalLipide: 0,
+        totalGlucide: 0,
+        totalCalorique: 0
+    }
+    for(let i = 0; i < ingredients.length; i++){
+        const ingredient: IIngredient = ingredients[i]
+        const {protein_per_100, lipid_per_100, carbohydrate_per_100} = ingredient
+        const totalGrammeProtein = (ingredient.quantity / 100) * protein_per_100
+        const totalGrammeLipide = (ingredient.quantity / 100) * lipid_per_100
+        const totalGrammeGlucide = (ingredient.quantity / 100) * carbohydrate_per_100
+
+        const total = (totalGrammeProtein * refCal.proteine) + (totalGrammeLipide * refCal.lipide) + (totalGrammeGlucide * refCal.glucide)
+        
+        resultNutrition.totalProtein += totalGrammeProtein
+        resultNutrition.totalLipide += totalGrammeLipide
+        resultNutrition.totalGlucide += totalGrammeGlucide
+        resultNutrition.totalCalorique += total
+    }   
+    return resultNutrition
+}

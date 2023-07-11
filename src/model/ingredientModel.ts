@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 export interface IIngredient {
     _id: string
     name: string,
-    quantity: string,
+    quantity: number,
     protein_per_100: number,
     carbohydrate_per_100: number,
     lipid_per_100: number,
