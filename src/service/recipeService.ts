@@ -1,4 +1,5 @@
 import {Recipe, IRecipe} from "../model/recipeModel"
+import { IStep } from "../model/stepModel"
 import * as ingredientService from "../service/ingredientService"
 import * as stepService from "../service/stepService"
 
@@ -88,3 +89,45 @@ export const findOne = async(recipeId: string) => {
     }
 }
 
+// Fonction de mise à jour de la recette
+export const update = async (recipeId: string, updatedData: IRecipe, userId: string) => {
+    try {
+        //Vérifier que l'utilisateur est bien le créateur de la recette
+        if(updatedData.user?.toString() !== userId){
+            return new Error("You are not authorized to update this recipe")
+        }
+      const { ingredients, steps } = updatedData;
+      // Met à jour la recette
+      const updatedRecipe = await Recipe.findByIdAndUpdate(recipeId, {
+        name: updatedData.name,
+        number_of_person: updatedData.number_of_person,
+        user: userId,
+      });
+      if (!updatedRecipe) {
+        return new Error("Recipe not found");
+      }
+      // Met à jour les ingrédients existants
+      const updatedIngredients = await Promise.all(
+        ingredients.map((ingredient) => ingredientService.updateIngredient(ingredient._id, ingredient))
+      );
+      // Met à jour les étapes existantes
+      const updatedSteps = await Promise.all(
+        steps.map((step) => stepService.updateStep(step._id, step))
+      );
+      // Met à jour les références d'ingrédients et d'étapes dans la recette
+      updatedRecipe.ingredients = updatedIngredients.map((ingredient: any) => ingredient._id);
+      updatedRecipe.steps = updatedSteps.map((step: any) => step._id);
+  
+      // Enregistre les modifications de la recette
+      await updatedRecipe.save();
+  
+      // Récupère la recette mise à jour avec les ingrédients et étapes hydratés
+      const recipe = await Recipe.findById(updatedRecipe._id)
+        .populate("ingredients")
+        .populate("steps");
+  
+      return recipe;
+    } catch (error) {
+      return error;
+    }
+  };
