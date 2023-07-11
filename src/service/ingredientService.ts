@@ -18,3 +18,13 @@ export const deleteMany = async(data: any[]) =>{
         return e
     }
 }
+
+// Service pour la mise à jour d'un ingrédient
+export const updateIngredient = async (ingredientId: string, updatedData: IIngredient) => {
+    try {
+      const updatedIngredient = await Ingredient.findByIdAndUpdate(ingredientId, updatedData, { new: true });
+      return updatedIngredient;
+    } catch (error) {
+      return error;
+    }
+  };

@@ -24,3 +24,13 @@ export const deleteMany = async(data: any[]) =>{
         return e
     }
 }
+
+// Service pour la mise à jour d'une étape
+export const updateStep = async (stepId: string, updatedData: IStep) => {
+    try {
+      const updatedStep = await Step.findByIdAndUpdate(stepId, updatedData, { new: true });
+      return updatedStep;
+    } catch (error) {
+      return error;
+    }
+  };

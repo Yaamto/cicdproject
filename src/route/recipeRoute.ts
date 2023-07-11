@@ -7,5 +7,6 @@ router.get('/', recipeController.findAll )
 router.post('/', checkAuth, recipeController.create)
 router.delete('/:id', checkAuth, recipeController.deleteRecipe)
 router.get('/:id', recipeController.findOne)
+router.put('/:id', checkAuth, recipeController.update)
 
 module.exports = router
