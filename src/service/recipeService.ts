@@ -5,7 +5,7 @@ import * as stepService from "../service/stepService"
 
 //Récupération de toutes les recettes
 export const findAll = async() => {
-    const recipes: IRecipe[] = await Recipe.find()
+    const recipes: IRecipe[] = await Recipe.find().populate("ingredients").populate("steps").populate("user")
     if(!recipes){
         return new Error("Not found")
     }
