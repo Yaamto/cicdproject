@@ -3,6 +3,7 @@ import {Recipe, IRecipe} from "../model/recipeModel"
 import { IStep } from "../model/stepModel"
 import * as ingredientService from "../service/ingredientService"
 import * as stepService from "../service/stepService"
+import { faker } from '@faker-js/faker';
 
 //Récupération de toutes les recettes
 export const findAll = async() => {
@@ -147,6 +148,36 @@ export const update = async (recipeId: string, updatedData: IRecipe, userId: str
   }catch(error){
     return error
   }
+}
+
+export const random = async(userId: string) => {
+    try {
+       //create random recipes based on random ingredients and steps
+            const recipe = new Recipe({
+                name: faker.lorem.words(3),
+                number_of_person: faker.number.int({min: 1, max: 10}),
+                user: userId
+            })
+            //Récupération des ingrédients et étapes aléatoires
+            const ingredients: any = await ingredientService.findRandom()
+            const steps: any = await stepService.findRandom(recipe._id.toString())
+            //Ajout des ingrédients et étapes à la recette
+            recipe.ingredients = await ingredients.map((ingredient: any) => ingredient._id)
+            recipe.steps = await steps.map((step: any) => step._id)
+            //Enregistrement de la recette
+            const newRecipe = await recipe.save()
+            //Hydratation des données
+            await newRecipe.populate("ingredients")
+            await newRecipe.populate("steps")
+            await newRecipe.populate("user", "-password")
+            // Vérification de la création de la recette
+            if(!newRecipe){
+                return new Error("Problème lors de la création de la recette")
+            }
+            return newRecipe
+    }catch(error){
+        return error
+    }
 }
 
 const calculCalorique = async (ingredients: any) => {
