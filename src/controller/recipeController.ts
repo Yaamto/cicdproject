@@ -72,3 +72,16 @@ export const analyze = async(req: Request, res: Response) => {
         return res.status(400).json({error: error})
     }
 }
+
+export const random = async(req: Request, res: Response) => {
+    try {
+        console.log("test")
+        const data: any = await recipeService.random(res.locals.user._id.toString())
+        if(data instanceof Error) {
+            return res.status(400).json({error: data.message})
+        }
+        return res.status(200).json({data})
+    }catch(error){
+        return res.status(400).json({error: error})
+    }
+}
