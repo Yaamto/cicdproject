@@ -180,14 +180,28 @@ export const random = async(userId: string) => {
     }
 }
 
-const calculCalorique = async (ingredients: any) => {
-    const refCal = {
-        proteine: 4,
-        lipide: 9,
-        glucide: 4
+export const analyzeObject = async (recipe: Partial<IRecipe>) => {
+    try {
+        const result = await calculCalorique(recipe.ingredients);
+        if(!result){
+            return new Error("Erreur lors de l'analyze");
+        }
+        return result;
+    }catch(error){
+        return error
     }
-    const resultNutrition = {
-        totalProtein: 0,
+}
+
+
+const calculCalorique = async (ingredients: any) => {
+    try {
+        const refCal = {
+            proteine: 4,
+            lipide: 9,
+            glucide: 4
+        }
+        const resultNutrition = {
+            totalProtein: 0,
         totalLipide: 0,
         totalGlucide: 0,
         totalCalorique: 0
@@ -198,7 +212,7 @@ const calculCalorique = async (ingredients: any) => {
         const totalGrammeProtein = (ingredient.quantity / 100) * protein_per_100
         const totalGrammeLipide = (ingredient.quantity / 100) * lipid_per_100
         const totalGrammeGlucide = (ingredient.quantity / 100) * carbohydrate_per_100
-
+        
         const total = (totalGrammeProtein * refCal.proteine) + (totalGrammeLipide * refCal.lipide) + (totalGrammeGlucide * refCal.glucide)
         
         resultNutrition.totalProtein += totalGrammeProtein
@@ -207,4 +221,7 @@ const calculCalorique = async (ingredients: any) => {
         resultNutrition.totalCalorique += total
     }   
     return resultNutrition
+    }catch(error){
+        return error
+    }
 }
