@@ -31,3 +31,12 @@ export const logout = async(req: Request, res: Response) => {
     res.cookie("jwt", "", { maxAge: 1 });
     return res.status(200).json({message: "Your are now logged out"})
 }
+
+export const whoami = async(req: Request, res: Response) => {
+    const user = res.locals.user
+    user.password = undefined
+    if(!user){
+        return res.status(403).json({error: "No user found"})
+    }
+    return res.status(200).json({user})
+}

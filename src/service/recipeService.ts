@@ -6,7 +6,7 @@ import * as stepService from "../service/stepService"
 
 //Récupération de toutes les recettes
 export const findAll = async() => {
-    const recipes: IRecipe[] = await Recipe.find().populate("ingredients").populate("steps").populate("user")
+    const recipes: IRecipe[] = await Recipe.find().populate("ingredients").populate("steps").populate("user", "-password")
     if(!recipes){
         return new Error("Not found")
     }
@@ -94,7 +94,7 @@ export const findOne = async(recipeId: string) => {
 export const update = async (recipeId: string, updatedData: IRecipe, userId: string) => {
     try {
         //Vérifier que l'utilisateur est bien le créateur de la recette
-        if(updatedData.user?.toString() !== userId){
+        if(updatedData.user?._id.toString() !== userId){
             return new Error("You are not authorized to update this recipe")
         }
       const { ingredients, steps } = updatedData;
