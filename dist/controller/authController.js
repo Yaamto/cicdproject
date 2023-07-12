@@ -32,7 +32,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.logout = exports.login = exports.register = void 0;
+exports.whoami = exports.logout = exports.login = exports.register = void 0;
 const userService = __importStar(require("../service/authService"));
 const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -66,3 +66,12 @@ const logout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     return res.status(200).json({ message: "Your are now logged out" });
 });
 exports.logout = logout;
+const whoami = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = res.locals.user;
+    user.password = undefined;
+    if (!user) {
+        return res.status(403).json({ error: "No user found" });
+    }
+    return res.status(200).json({ user });
+});
+exports.whoami = whoami;
