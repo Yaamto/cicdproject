@@ -1,0 +1,310 @@
+{
+	"info": {
+		"_postman_id": "0c0977c0-2019-4736-b00b-99f3699fee5a",
+		"name": "ChallengeStack",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25123214",
+		"_collection_link": "https://blue-desert-872411.postman.co/workspace/nestjs~7844ef45-3ea3-4cd9-99d2-cf96872f9587/collection/25123214-0c0977c0-2019-4736-b00b-99f3699fee5a?action=share&creator=25123214&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "recipes",
+			"item": [
+				{
+					"name": "findAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3003/api/recipes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"recipes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Crepe au sucre\",\r\n  \"number_of_person\": 10,\r\n  \"ingredients\": [\r\n    {\r\n      \"name\":  \"Sucre\",\r\n      \"quantity\": 300,\r\n      \"protein_per_100\": 13,\r\n      \"carbohydrate_per_100\": 1.1,\r\n      \"lipid_per_100\": 9.5,\r\n      \"unity\": \"g\"\r\n    },\r\n    {\r\n      \"name\":  \"Sel\",\r\n      \"quantity\": 150,\r\n      \"protein_per_100\": 10,\r\n      \"carbohydrate_per_100\": 76,\r\n      \"lipid_per_100\": 1.2,\r\n      \"unity\": \"g\"\r\n    }\r\n  ],\r\n  \"steps\": [\r\n    {\r\n      \"description\":  \"Sucrez le sel\",\r\n      \"order\": 1\r\n    },\r\n    {\r\n      \"description\":  \"Salez le sucre\",\r\n      \"order\": 2\r\n    },\r\n      {\r\n      \"description\":  \"Manger la crêpe\",\r\n      \"order\": 3\r\n    },\r\n    {\r\n        \"description\": \"Faire la vaiselle\",\r\n        \"order\": 4\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/recipes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"recipes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3003/api/recipes/64ad1c3906ac4a1c8e954d40",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"recipes",
+								"64ad1c3906ac4a1c8e954d40"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "findOne",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3003/api/recipes/64ad13cba9fd9e20a0e37b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"recipes",
+								"64ad13cba9fd9e20a0e37b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n            \"_id\": \"64ae4b978813471a3d4acff3\",\r\n            \"name\": \"Crepe au nutella\",\r\n            \"number_of_person\": 4,\r\n            \"user\": {\r\n                \"_id\": \"64ad1c2e06ac4a1c8e954d3c\",\r\n                \"firstName\": \"basile\",\r\n                \"lastName\": \"Regnault\",\r\n                \"email\": \"basile@test.fr\",\r\n                \"isAdmin\": false,\r\n                \"createdAt\": \"2023-07-11T09:09:02.534Z\",\r\n                \"updatedAt\": \"2023-07-11T09:09:02.534Z\",\r\n                \"__v\": 0\r\n            },\r\n            \"ingredients\": [\r\n                {\r\n                    \"_id\": \"64ae4b978813471a3d4acff8\",\r\n                    \"name\": \"Oeuf\",\r\n                    \"quantity\": 3,\r\n                    \"protein_per_100\": 13,\r\n                    \"carbohydrate_per_100\": 1,\r\n                    \"lipid_per_100\": 9,\r\n                    \"unity\": \"g\",\r\n                    \"createdAt\": \"2023-07-12T06:43:35.263Z\",\r\n                    \"updatedAt\": \"2023-07-12T06:54:25.049Z\",\r\n                    \"__v\": 0\r\n                },\r\n                {\r\n                    \"_id\": \"64ae4b978813471a3d4acffa\",\r\n                    \"name\": \"Farine\",\r\n                    \"quantity\": 150,\r\n                    \"protein_per_100\": 10,\r\n                    \"carbohydrate_per_100\": 76,\r\n                    \"lipid_per_100\": 1.2,\r\n                    \"unity\": \"g\",\r\n                    \"createdAt\": \"2023-07-12T06:43:35.372Z\",\r\n                    \"updatedAt\": \"2023-07-12T06:54:25.049Z\",\r\n                    \"__v\": 0\r\n                }\r\n            ],\r\n            \"steps\": [\r\n                {\r\n                    \"_id\": \"64ae4b978813471a3d4acff4\",\r\n                    \"description\": \"Mélanger L'oeuf et le lait\",\r\n                    \"order\": 1,\r\n                    \"recipe\": \"64ae4b978813471a3d4acff3\",\r\n                    \"createdAt\": \"2023-07-12T06:43:35.119Z\",\r\n                    \"updatedAt\": \"2023-07-12T06:54:25.110Z\",\r\n                    \"__v\": 0\r\n                },\r\n                {\r\n                    \"_id\": \"64ae4b978813471a3d4acff6\",\r\n                    \"description\": \"Cuire les crêpes\",\r\n                    \"order\": 2,\r\n                    \"recipe\": \"64ae4b978813471a3d4acff3\",\r\n                    \"createdAt\": \"2023-07-12T06:43:35.214Z\",\r\n                    \"updatedAt\": \"2023-07-12T06:54:25.110Z\",\r\n                    \"__v\": 0\r\n                },\r\n                 {\r\n                    \"_id\": \"64ae4b978813471a3d4acff6\",\r\n                    \"description\": \"Manger les crêpes\",\r\n                    \"order\": 3,\r\n                    \"recipe\": \"64ae4b978813471a3d4acff3\",\r\n                    \"createdAt\": \"2023-07-12T06:43:35.214Z\",\r\n                    \"updatedAt\": \"2023-07-12T06:54:25.110Z\",\r\n                    \"__v\": 0\r\n                },\r\n                 {\r\n                    \"_id\": \"64ae4b978813471a3d4acff6\",\r\n                    \"description\": \"Faire la vaisselle\",\r\n                    \"order\": 4,\r\n                    \"recipe\": \"64ae4b978813471a3d4acff3\",\r\n                    \"createdAt\": \"2023-07-12T06:43:35.214Z\",\r\n                    \"updatedAt\": \"2023-07-12T06:54:25.110Z\",\r\n                    \"__v\": 0\r\n                }\r\n            ],\r\n            \"createdAt\": \"2023-07-12T06:43:35.423Z\",\r\n            \"updatedAt\": \"2023-07-12T06:54:24.959Z\",\r\n            \"__v\": 0\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/recipes/64ae4b978813471a3d4acff3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"recipes",
+								"64ae4b978813471a3d4acff3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "analyzeById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3003/api/recipes/analyze/64ad7d125cfc6ef5eb2032a7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"recipes",
+								"analyze",
+								"64ad7d125cfc6ef5eb2032a7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "random",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3003/api/recipes/random/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"recipes",
+								"random",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "analyzeByObject",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3003/api/recipes/single/analyze",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"recipes",
+								"single",
+								"analyze"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "whoami",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3003/api/auth/whoami",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"auth",
+								"whoami"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"hugo\",\r\n    \"lastName\": \"Regnault\",\r\n    \"email\": \"hugo@test.fr\",\r\n    \"password\": \"test\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"basile@test.fr\",\r\n    \"password\": \"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3003/api/auth/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
