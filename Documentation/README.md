@@ -65,11 +65,11 @@ La documentation des endpoints de notre API ce fait via Swager.
 
 Une fois le serveur lancé, il faut ce rendre sur : [API DOC](http://localhost:3003/api-docs/)
 
-![img](https://cdn.discordapp.com/attachments/938010834607669288/1127890835653001326/Capture_decran_2023-07-10_100632.png)
+![img](https://github.com/Yaamto/challenge-stack-node-back/blob/documentation/Documentation/Images/swager_endpoints.png)
 
 Pour les requetes qui demande une authentification, il faut utiliser Jwt qui stock le token dans les cookies. Il faut le mettre dans les autorisations comme ci-dessous. 
 
-![img](https://cdn.discordapp.com/attachments/938010834607669288/1127890835653001326/Capture_decran_2023-07-10_100632.png)
+![img](https://github.com/Yaamto/challenge-stack-node-back/blob/documentation/Documentation/Images/swager_token.png)
 
 Cependant, nous avons vu avec vous que le "try it out" de swagger ne permet pas l'autorisation par cookie. Pour que cela marche, il faut set le cookie manuellement dans le navigateur :
 (inspecter l'élément->onglet application->Cookies)
