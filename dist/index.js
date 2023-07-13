@@ -7,6 +7,8 @@ const express_1 = __importDefault(require("express"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const cors_1 = __importDefault(require("cors"));
+const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
+const swagger_1 = require("./swagger/swagger");
 const authRoute = require("./route/authRoute");
 const recipeRoute = require("./route/recipeRoute");
 require('./config/db');
@@ -17,6 +19,11 @@ app.use((0, cors_1.default)({
     origin: "http://localhost:3000",
     credentials: true,
 }));
+//SwaggerUi
+/* Swagger */
+app.use('/api-docs', swagger_ui_express_1.default.serve);
+app.get('/api-docs', swagger_ui_express_1.default.setup(swagger_1.swaggerSpec));
+app.get('/', (req, res, next) => res.redirect('api-docs'));
 app.use((0, cookie_parser_1.default)());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
