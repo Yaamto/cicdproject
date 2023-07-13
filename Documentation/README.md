@@ -96,3 +96,7 @@ GET /random/create - Génére une recette aléatoire
 		|-- index.php 
 ```
 
+### 1.6 Postman
+
+Collection Postman pour tester l'API : [Collection](https://github.com/Yaamto/challenge-stack-node-back/blob/documentation/Documentation/ChallengeStack.postman_collection.json)
+
