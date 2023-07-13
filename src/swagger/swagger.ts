@@ -34,14 +34,19 @@ const swaggerDefinition = {
     },
   ],
   components: {
-    // securitySchemes: {
-    //   bearerAuth: {
-    //     bearerFormat: 'JWT',
-    //     scheme: 'bearer',
-    //     type: 'http',
-    //   },
-    // },
+    securitySchemes: {
+      jwtToken: {
+        type: 'apiKey',
+        in: 'cookie',
+        name: 'jwt',
+      },
+    },
   },
+   security: [
+    {
+      jwtToken: [],
+    },
+  ],
 };
 
 const route = (fileName: any) => `./src/route/${fileName}.ts`;

@@ -14,7 +14,7 @@ const app: Express = express();
 const port = process.env.PORT || 3003;
 app.use(
   cors({
-      origin:"http://localhost:3000",
+      origin:"*",
       credentials: true,
   })
 );
@@ -23,7 +23,6 @@ app.use(
 app.use('/api-docs', swaggerUi.serve);
 app.get('/api-docs', swaggerUi.setup(swaggerSpec));
 app.get('/', (req, res, next) => res.redirect('api-docs'));
-
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())  

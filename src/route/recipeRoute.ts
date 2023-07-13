@@ -15,6 +15,7 @@ import { checkAuth } from "../middleware/checkAuth";
  *   get:
  *     tags:
  *       - "Recipes"
+ *     summary: "Récupération de toutes les recettes"
  *     description: "Récupération de toutes les recettes"
  *     produces:
  *       - application/json
@@ -104,10 +105,179 @@ import { checkAuth } from "../middleware/checkAuth";
  *                         __v:
  *                           type: integer
  */
-router.get('/', recipeController.findAll )
+router.get('/', recipeController.findAll)
+
+/**
+ * @openapi
+ * /api/recipes:
+ *   post:
+ *     tags:
+ *       - "Recipes"
+ *     summary: "Create a recipe"
+ *     description: "Create a new recipe"
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: "Name of the recipe"
+ *               number_of_person:
+ *                 type: integer
+ *                 description: "Number of persons"
+ *               ingredients:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     name:
+ *                       type: string
+ *                       description: "Name of the ingredient"
+ *                     quantity:
+ *                       type: number
+ *                       description: "Quantity of the ingredient"
+ *                     protein_per_100:
+ *                       type: number
+ *                       description: "Protein per 100 grams of the ingredient"
+ *                     carbohydrate_per_100:
+ *                       type: number
+ *                       description: "Carbohydrate per 100 grams of the ingredient"
+ *                     lipid_per_100:
+ *                       type: number
+ *                       description: "Lipid per 100 grams of the ingredient"
+ *                     unity:
+ *                       type: string
+ *                       description: "Unit of measurement of the ingredient"
+ *               steps:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     description:
+ *                       type: string
+ *                       description: "Description of the step"
+ *                     order:
+ *                       type: integer
+ *                       description: "Order of the step in the recipe"
+ *             required:
+ *               - name
+ *               - number_of_person
+ *               - ingredients
+ *               - steps
+ *     responses:
+ *       '201':
+ *         description: Recipe created successfully
+ *       '400':
+ *         description: Invalid informations
+ *       '403':
+ *         description: Forbidden - Missing or expired JWT token
+ */
 router.post('/', checkAuth, recipeController.create)
+/**
+ * @openapi
+ * /api/recipes/{id}:
+ *   delete:
+ *     tags:
+ *       - "Recipes"
+ *     summary: "Supprime une recette"
+ *     description: "Supprime une recette grâce à son ID"
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: "ID de la recette à supprimer"
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Recette supprimée avec succès
+ *       '400':
+ *         description: Erreur lors de la suppression de la recette
+ *       '403':
+ *         description: Forbidden - Missing or expired JWT token
+ */
 router.delete('/:id', checkAuth, recipeController.deleteRecipe)
 router.get('/:id', recipeController.findOne)
+/**
+ * @openapi
+ * /api/recipes/{id}:
+ *   put:
+ *     tags:
+ *       - "Recipes"
+ *     summary: "Update a recipe"
+ *     description: "Update a recipe by its ID"
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: "ID of the recipe to update"
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: "Name of the recipe"
+ *               number_of_person:
+ *                 type: integer
+ *                 description: "Number of persons"
+ *               ingredients:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     name:
+ *                       type: string
+ *                       description: "Name of the ingredient"
+ *                     quantity:
+ *                       type: number
+ *                       description: "Quantity of the ingredient"
+ *                     protein_per_100:
+ *                       type: number
+ *                       description: "Protein per 100 grams of the ingredient"
+ *                     carbohydrate_per_100:
+ *                       type: number
+ *                       description: "Carbohydrate per 100 grams of the ingredient"
+ *                     lipid_per_100:
+ *                       type: number
+ *                       description: "Lipid per 100 grams of the ingredient"
+ *                     unity:
+ *                       type: string
+ *                       description: "Unit of measurement of the ingredient"
+ *               steps:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     description:
+ *                       type: string
+ *                       description: "Description of the step"
+ *                     order:
+ *                       type: integer
+ *                       description: "Order of the step in the recipe"
+ *             required:
+ *               - name
+ *               - number_of_person
+ *               - ingredients
+ *               - steps
+ *     responses:
+ *       '200':
+ *         description: Recipe updated successfully
+ *       '400':
+ *         description: Invalid information
+ *       '403':
+ *         description: Forbidden - Missing or expired JWT token
+ *       '404':
+ *         description: Recipe not found
+ */
 router.put('/:id', checkAuth, recipeController.update)
 router.get('/analyze/:id', recipeController.analyze)
 router.post('/single/analyze', recipeController.analyzeObject)
