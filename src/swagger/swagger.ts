@@ -11,11 +11,11 @@ const url = 'http://localhost:3003';
 
 const swaggerDefinition = {
   info: {
-    description: 'Custom structure to build an REST API using Express.js',
+    description: 'Endpoint de notre API Node',
     license: {
       name: 'All Rights Reserved',
     },
-    title: 'Custom structure to build an REST API using Express.js',
+    title: 'Projet challenge stack Node/vue',
     version,
   },
   openapi: '3.0.0',
@@ -26,11 +26,20 @@ const swaggerDefinition = {
       description: 'Recipes',
       name: 'Recipes',
     },
+    {
+      description: "Authentication",
+      name: "Authentication"
+
+    }
   ],
   'x-tagGroups': [
     {
       name: 'General',
       tags: ['Recipes'],
+    },
+    {
+      name: 'General',
+      tags: ['Auth'],
     },
   ],
   components: {

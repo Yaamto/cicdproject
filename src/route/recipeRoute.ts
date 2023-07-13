@@ -112,8 +112,8 @@ router.get('/', recipeController.findAll )
  *   post:
  *     tags:
  *       - "Recipes"
- *     summary: "Create a recipe"
- *     description: "Create a new recipe"
+ *     summary: "Créer une recette"
+ *     description: "Création d'une recette"
  *     requestBody:
  *       required: true
  *       content:
@@ -205,8 +205,8 @@ router.delete('/:id', checkAuth, recipeController.deleteRecipe)
  *   get:
  *     tags:
  *       - "Recipes"
- *     description: "Récupération de toutes les recettes"
- *     summary: "Get one recipe"
+ *     description: "Récupération d'une seule recette grâce à son ID"
+ *     summary: "Récupère une recette"
  *     parameters:
  *       - in: path
  *         name: id
@@ -309,13 +309,13 @@ router.get('/:id', recipeController.findOne)
  *   put:
  *     tags:
  *       - "Recipes"
- *     summary: "Update a recipe"
- *     description: "Update a recipe by its ID"
+ *     summary: "Modification d'une recette"
+ *     description: "Modifier une recette grâce à son ID"
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: "ID of the recipe to update"
+ *         description: "ID de la recette à modifier"
  *         schema:
  *           type: string
  *     requestBody:
@@ -388,7 +388,7 @@ router.put('/:id', checkAuth, recipeController.update)
  *     tags:
  *       - "Recipes"
  *     description: "Analyse des apports nutritionnels d'une recette "
- *     summary: "Analyze one recipe with ID's recipe"
+ *     summary: "Analyse une recette par son ID"
  *     parameters:
  *       - in: path
  *         name: id
@@ -419,7 +419,170 @@ router.put('/:id', checkAuth, recipeController.update)
  *
  */
 router.get('/analyze/:id', recipeController.analyze)
+/**
+ * @openapi
+ * /api/recipes/single/analyze:
+ *   post:
+ *     tags:
+ *       - "Recipes"
+ *     summary: "Analyse une recette par son objet"
+ *     description: "Analyse une recette"
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 description: "Name of the recipe"
+ *               number_of_person:
+ *                 type: integer
+ *                 description: "Number of persons"
+ *               ingredients:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     name:
+ *                       type: string
+ *                       description: "Name of the ingredient"
+ *                     quantity:
+ *                       type: number
+ *                       description: "Quantity of the ingredient"
+ *                     protein_per_100:
+ *                       type: number
+ *                       description: "Protein per 100 grams of the ingredient"
+ *                     carbohydrate_per_100:
+ *                       type: number
+ *                       description: "Carbohydrate per 100 grams of the ingredient"
+ *                     lipid_per_100:
+ *                       type: number
+ *                       description: "Lipid per 100 grams of the ingredient"
+ *                     unity:
+ *                       type: string
+ *                       description: "Unit of measurement of the ingredient"
+ *               steps:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     description:
+ *                       type: string
+ *                       description: "Description of the step"
+ *                     order:
+ *                       type: integer
+ *                       description: "Order of the step in the recipe"
+ *             required:
+ *               - name
+ *               - number_of_person
+ *               - ingredients
+ *               - steps
+ *     responses:
+ *       '200':
+ *         description: Recipe created successfully
+ *       '400':
+ *         description: Invalid informations
+ */
 router.post('/single/analyze', recipeController.analyzeObject)
+/**
+ * @swagger
+ * /api/recipes/random/create:
+ *   get:
+ *     tags:
+ *       - "Recipes"
+ *     description: "Génération d'une recette aléatoire grâce aux recettes existantes"
+ *     summary: "Générer une recette aléatoire"
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       '200':
+ *         description: Recette
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   _id:
+ *                     type: string
+ *                   name:
+ *                     type: string
+ *                   number_of_person:
+ *                     type: integer
+ *                   user:
+ *                     type: object
+ *                     properties:
+ *                       _id:
+ *                         type: string
+ *                       firstName:
+ *                         type: string
+ *                       lastName:
+ *                         type: string
+ *                       email:
+ *                         type: string
+ *                       isAdmin:
+ *                         type: boolean
+ *                       createdAt:
+ *                         type: string
+ *                         format: date-time
+ *                       updatedAt:
+ *                         type: string
+ *                         format: date-time
+ *                       __v:
+ *                         type: integer
+ *                   ingredients:
+ *                     type: array
+ *                     items:
+ *                       type: object
+ *                       properties:
+ *                         _id:
+ *                           type: string
+ *                         name:
+ *                           type: string
+ *                         quantity:
+ *                           type: number
+ *                         protein_per_100:
+ *                           type: number
+ *                         carbohydrate_per_100:
+ *                           type: number
+ *                         lipid_per_100:
+ *                           type: number
+ *                         unity:
+ *                           type: string
+ *                         createdAt:
+ *                           type: string
+ *                           format: date-time
+ *                         updatedAt:
+ *                           type: string
+ *                           format: date-time
+ *                         __v:
+ *                           type: integer
+ *                   steps:
+ *                     type: array
+ *                     items:
+ *                       type: object
+ *                       properties:
+ *                         _id:
+ *                           type: string
+ *                         description:
+ *                           type: string
+ *                         order:
+ *                           type: integer
+ *                         recipe:
+ *                           type: string
+ *                         createdAt:
+ *                           type: string
+ *                           format: date-time
+ *                         updatedAt:
+ *                           type: string
+ *                           format: date-time
+ *                         __v:
+ *                           type: integer
+ * 
+ */
 router.get('/random/create', checkAuth, recipeController.random)
 
 
