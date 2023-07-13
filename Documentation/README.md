@@ -59,25 +59,20 @@ npm run dev
 
 L’API démarre par défaut sur http://localhost:3003 par défaut. **Attention l'API n'accepte que le port 3000**
 
-### 1.4 Fonctionnement technique
+### 1.4 API
 
-#### 1.4.1 EndPoint API 
+La documentation des endpoints de notre API ce fait via Swager.
 
-```
-Authentification : 
-POST /register - S'enregistrer
-POST /login - Se connecter 
-POST /logout - Se déconnecter
-GET /whoami - Vérifier le token
+Une fois le serveur lancé, il faut ce rendre sur : [API DOC](http://localhost:3003/api-docs/)
 
-Recettes : 
-GET / - Récupérer l'ensemble des recettes
-POST / - Créer une recette
-DELETE /{id} - Supprimer une recette
-PUT /{id} - Modifier une recette
-GET /analyse/{id} - Analyser l'apport calorique d'une recette
-GET /random/create - Génére une recette aléatoire
-```
+![img](https://cdn.discordapp.com/attachments/938010834607669288/1127890835653001326/Capture_decran_2023-07-10_100632.png)
+
+Pour les requetes qui demande une authentification, il faut utiliser Jwt qui stock le token dans les cookies. Il faut le mettre dans les autorisations comme ci-dessous. 
+
+![img](https://cdn.discordapp.com/attachments/938010834607669288/1127890835653001326/Capture_decran_2023-07-10_100632.png)
+
+Cependant, nous avons vu avec vous que le "try it out" de swagger ne permet pas l'autorisation par cookie. Pour que cela marche, il faut set le cookie manuellement dans le navigateur :
+(inspecter l'élément->onglet application->Cookies)
 
 ### 1.5 Architecture des projets
 
