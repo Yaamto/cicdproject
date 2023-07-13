@@ -104,12 +104,14 @@ import { checkAuth } from "../middleware/checkAuth";
  *                         __v:
  *                           type: integer
  */
-router.get("/", recipeController.findAll);
-router.post("/", checkAuth, recipeController.create);
-router.delete("/:id", checkAuth, recipeController.deleteRecipe);
-router.get("/:id", recipeController.findOne);
-router.put("/:id", checkAuth, recipeController.update);
-router.get("/analyze/:id", recipeController.analyze);
-router.get("/random/create", checkAuth, recipeController.random);
+router.get('/', recipeController.findAll )
+router.post('/', checkAuth, recipeController.create)
+router.delete('/:id', checkAuth, recipeController.deleteRecipe)
+router.get('/:id', recipeController.findOne)
+router.put('/:id', checkAuth, recipeController.update)
+router.get('/analyze/:id', recipeController.analyze)
+router.post('/single/analyze', recipeController.analyzeObject)
+router.get('/random/create', checkAuth, recipeController.random)
+
 
 module.exports = router;
