@@ -1,6 +1,5 @@
 
 import { User, IUser } from "../model/userModel";
-import express, { Request, Response } from 'express';
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken"
 export const findOne = async(data: IUser) => {
@@ -48,7 +47,7 @@ export const createToken = (id: string) => {
 }
 
 const loginCompare = async function (email: string, password: string) {
-    const user = await User.findOne({ email });
+    const user: any = await User.findOne({ email });
     if (user) {
       const auth = await bcrypt.compare(password, user.password as string);
       if (auth) {

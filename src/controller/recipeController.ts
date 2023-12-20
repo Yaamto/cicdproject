@@ -1,9 +1,10 @@
 import * as recipeService from "../service/recipeService";
 import { Request, Response } from 'express';
+import {IRecipe} from "../model/recipeModel"
 
 export const findAll = async(req: Request, res: Response) => {
     try {
-        const data: any = await recipeService.findAll()
+        const data: IRecipe[] | Error = await recipeService.findAll()
         if(data instanceof Error){
             return res.status(404).json({error: data.message})
         }

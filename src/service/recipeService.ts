@@ -1,6 +1,5 @@
 import { IIngredient } from "../model/ingredientModel"
 import {Recipe, IRecipe} from "../model/recipeModel"
-import { IStep } from "../model/stepModel"
 import * as ingredientService from "../service/ingredientService"
 import * as stepService from "../service/stepService"
 import { faker } from '@faker-js/faker';
@@ -17,7 +16,7 @@ export const findAll = async() => {
 // Création d'une recette
 export const create = async(data: IRecipe, userId: string) => {
     const {ingredients, steps} = data
-    let order: number[] = []
+    const order: number[] = []
     try {
         const newRecipe = new Recipe({
             name: data.name,

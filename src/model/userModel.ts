@@ -2,13 +2,13 @@ import mongoose from "mongoose";
 import * as bcrypt from "bcrypt";
 
 export interface IUser {
-    _id: String,
-    firstName: String,
-    lastName: String,
-    email: String,
-    password: String,
+    _id: string,
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
     birthday: Date,
-    isAdmin: Boolean,
+    isAdmin: boolean,
 }
 
 const UserSchema = new mongoose.Schema({
