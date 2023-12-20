@@ -48,8 +48,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB }}
       - name: Push if on `main`
         uses: docker/build-push-action@v4
-        
         with:
           push: true
           context: ./
-          tags: yaamto69/sayhello:${{ github.ref_name }}
+          tags: yaamto69/nodeproject:${{ github.ref_name }}
