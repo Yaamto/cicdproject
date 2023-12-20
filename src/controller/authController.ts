@@ -32,6 +32,7 @@ export const logout = async(req: Request, res: Response) => {
     return res.status(200).json({message: "Your are now logged out"})
 }
 
+
 export const whoami = async(req: Request, res: Response) => {
     const user = res.locals.user
     user.password = undefined
