@@ -11,4 +11,4 @@ jobs:
         with:
           dockerfile: Dockerfile
       - run: docker image build -t nodejs_image ./
-      - run: docker run nodejs_image npm run lint  
+      - run: docker run nodejs_image sh -c "npm run lint && npm test" 
