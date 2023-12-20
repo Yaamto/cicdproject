@@ -1,0 +1,14 @@
+name: CI nodejs
+on:
+  - push
+  - pull_request
+jobs:
+  nodejs_test:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
+      - run: docker image build -t nodejs_image ./
+      - run: docker run nodejs_image npm run lint  
