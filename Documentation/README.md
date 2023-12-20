@@ -94,4 +94,3 @@ Cependant, nous avons vu avec vous que le "try it out" de swagger ne permet pas 
 ### 1.6 Postman
 
 Collection Postman pour tester l'API : [Collection](https://github.com/Yaamto/challenge-stack-node-back/blob/documentation/Documentation/ChallengeStack.postman_collection.json)
-
