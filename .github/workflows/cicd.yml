@@ -1,6 +1,8 @@
 name: CI nodejs
 on:
   push:
+    tags:
+      - '*'
     branches:
       - main
   pull_request:
@@ -36,7 +38,7 @@ jobs:
   continuous-delivery:
     runs-on: ubuntu-22.04
     if: startsWith(github.ref, 'refs/tags/')
-    needs: [continuous-integration, continuous-deployment]
+    needs: [continuous-integration]
     steps:
       - uses: actions/checkout@v3
       - name: Login to Docker Hub
