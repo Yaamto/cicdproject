@@ -22,3 +22,10 @@ jobs:
         with:
           username: yaamto69
           password: ${{ secrets.DOCKERHUB }}
+      - name: Push if on `main`
+        uses: docker/build-push-action@v4
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          push: true
+          context: ./
+          tags: yaamto69/nodeproject:${{ github.ref_name }}
