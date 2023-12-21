@@ -2,7 +2,7 @@
 # CI/CD devoir - documentation
 **Groupe : Fabien PONCET - Bilal Bouterbiat**
 
-Pour ce projet, nous avons décidé d'utiliser un dockerfile afin de dockeriser notre projet pour facilité le déploiement.
+Pour ce projet, nous avons décidé d'utiliser un dockerfile afin de dockeriser notre projet pour faciliter le déploiement.
 
 ## Intégration continue
 
@@ -38,7 +38,7 @@ Vérification du linter dockerfile :
 hadolint Dockerfile
 ```
 
-Cette suite de commande est joué à chaque fois que l'on déclenche la CI. Cela nous permet d'être certain que le code que l'on commit soit saint et non régressable.
+Cette suite de commande est joué à chaque fois que l'on déclenche la CI. Cela nous permet d'être certain que le code que l'on commit soit sain et non régressable.
 Si la CI détecte une erreur (ex: les tests ne passent pas) lors d'une PR, alors elle s'arrête et le code ne peut être merge.
 
 
@@ -58,8 +58,8 @@ Comme vue précedemment, Damien aura deux possibilités pour déployer l'applica
 
 Soit la livraison continue : 
 
-- Création d'un tag (selon une mise à jour majeur, mineur ou un correctif).
-- Pousser le tag qu'il aura tout juste créer.
+- Création d'un tag (selon une mise à jour majeure, mineure ou une corrective).
+- Pousser le tag qu'il aura tout juste crée.
 - Suivre l'état de la CI pour vérifier que tout s'est bien déroulé.
 
  Soit le déploiement continue : 
