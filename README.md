@@ -45,13 +45,17 @@ Si la CI détecte une erreur (ex: les tests ne passent pas) lors d'une PR, alors
 ## CD
 
 Lors de la CD nous avons décidé de déployer une image docker pour des choix d'optimisations.
+
 Lorsque nous déployons via une livraison continue alors le tag de l'image sera spécifié sur dockerhub.
+
 Lorsque nous déployons via un déploiement continue alors il n'y aura pas de tag spécifié mais la mention 'latest', permettant d'indiquer qu'il s'agit de la dernière version.
 
 
 ## Procédure à suivre pour Damien Duportal
 
 Comme vue précedemment, Damien aura deux possibilités pour déployer l'application.
+
+
 Soit la livraison continue : 
 
 - Création d'un tag (selon une mise à jour majeur, mineur ou un correctif).
