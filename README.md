@@ -1,3 +1,74 @@
+
+# CI/CD devoir - documentation
+**Groupe : Fabien PONCET - Bilal Bouterbiat**
+
+Pour ce projet, nous avons décidé d'utiliser un dockerfile afin de dockeriser notre projet pour facilité le déploiement.
+
+## Intégration continue
+
+Les différentes commandes afin de lancer la CI : 
+
+L'installation des dépendances en utilisant npm : 
+
+```
+npm install
+```
+
+Vérification de la qualité du code grâce au linter : 
+
+```
+npm run lint
+```
+
+Lancement des tests : 
+
+```
+npm run test
+```
+
+Build du projet : 
+
+```
+npm run build
+```
+
+Vérification du linter dockerfile : 
+
+```
+hadolint Dockerfile
+```
+
+Cette suite de commande est joué à chaque fois que l'on déclenche la CI. Cela nous permet d'être certain que le code que l'on commit soit saint et non régressable.
+Si la CI détecte une erreur (ex: les tests ne passent pas) lors d'une PR, alors elle s'arrête et le code ne peut être merge.
+
+
+## CD
+
+Lors de la CD nous avons décidé de déployer une image docker pour des choix d'optimisations.
+Lorsque nous déployons via une livraison continue alors le tag de l'image sera spécifié sur dockerhub.
+Lorsque nous déployons via un déploiement continue alors il n'y aura pas de tag spécifié mais la mention 'latest', permettant d'indiquer qu'il s'agit de la dernière version.
+
+
+## Procédure à suivre pour Damien Duportal
+
+Comme vue précedemment, Damien aura deux possibilités pour déployer l'application.
+Soit la livraison continue : 
+
+- Création d'un tag (selon une mise à jour majeur, mineur ou un correctif).
+- Pousser le tag qu'il aura tout juste créer.
+- Suivre l'état de la CI pour vérifier que tout s'est bien déroulé.
+
+ Soit le déploiement continue : 
+
+- Création d'une PR qui aura pour source sa branche et destination la branche main.
+- La CI se lance, il pourra alors vérifier que tout se passe correctement.
+- Si la CI passe, il devra valider le merge de la PR.
+- Vérifier sur github action le déploiement de l'image docker.
+
+
+
+
+
 # Documentation technique projet calculateur de calorie
 
 ## 1. Description du projet 
